@@ -1,0 +1,34 @@
+extends ../layouts/main.pug
+block content
+  .container
+    header
+      h1= title
+
+    div
+      table.table.table-striped
+        thead
+          tr
+            th Title
+            th Alias
+            th Full Name
+            th Affiliation
+            th MetaType
+            th Actions
+
+        tbody
+          each metaHuman in metaHumans
+            tr
+              td
+                a(href=`/metaHumans/${metaHuman.id}`)= metaHuman.alias
+              td
+                a(href=`/metaHumans/${metaHuman.id}`)= metaHuman.fullName
+              td
+                a(href=`/metaHumans/${metaHuman.id}`)= metaHuman.affiliation
+              td
+                a(href=`/metaHumans/${metaHuman.id}`)= metaHuman.metaType
+              td
+                a(href=`/metaHumans/${metaHuman.id}/edit`) edit
+                = ` | `
+                form.destroy(action=`/metaHumans/destroy`, method="POST", onsubmit='return confirm("Are you sure you wish to destroy this beautiful Meta Human?")')
+                  input(type="hidden", name="id", value=`${metaHuman.id}`)
+                  input.destroy(type="submit", value="destroy")

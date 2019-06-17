@@ -1,0 +1,25 @@
+form(action=(metaHuman ? '/metaHumans/update' : "/metaHumans"), method="POST")
+    if metaHuman
+        input(type="hidden", name="id", value=metaHuman.id)
+
+    .form-group
+        label Alias
+        input.form-control(name="metaHuman[alias]", required, value=(metaHuman ? metaHuman.alias : null))
+
+    .form-group
+        label Full Name
+        input.form-control(name="metaHuman[fullName]", required, value=(metaHuman ? metaHuman.fullName : null))
+
+    .form-group
+        label Affiliation
+        input.form-control(name="metaHuman[affiliation]", required, value=(metaHuman ? metaHuman.affiliation : null))
+
+    .form-group
+        label MetaType
+        select.form-control(name="metaHuman[metaType]", required)
+            each metaType in ['SUPERHERO', 'VILLAIN', 'ANTIHERO']
+                option(value=metaType, selected=(metaHuman && metaHuman.metaType === metaType))
+                    = metaType.toLowerCase()
+
+    .form-group
+        input.btn.btn-dark(type="submit", value="submit")
